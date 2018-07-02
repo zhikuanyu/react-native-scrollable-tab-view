@@ -136,6 +136,7 @@ const ScrollableTabBar = createReactClass({
       accessibilityTraits='button'
       onPress={() => onPressHandler(page)}
       onLayout={onLayoutHandler}
+      style={{marginRight: 60}}
     >
       <View style={[styles.tab, this.props.tabStyle, ]}>
         <Text style={[{color: textColor, }, fontStyle, textStyle, ]}>
@@ -223,8 +224,8 @@ const styles = StyleSheet.create({
     height: 49,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 3,
+    paddingRight: 3,
   },
   container: {
     height: 50,
@@ -233,9 +234,10 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderColor: '#ccc',
+    paddingLeft: 5
   },
   tabs: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-between',
   },
 });

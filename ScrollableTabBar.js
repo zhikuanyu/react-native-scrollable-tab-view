@@ -127,7 +127,7 @@ const ScrollableTabBar = createReactClass({
   renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = isTabActive ? 'bold' : 'normal';
+    const fontStyle = isTabActive ? {fontWeight: 'bold', fontSize: 16} : {fontWeight: 'normal', fontSize: 14};
 
     return <Button
       key={`${name}_${page}`}
@@ -138,7 +138,7 @@ const ScrollableTabBar = createReactClass({
       onLayout={onLayoutHandler}
     >
       <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+        <Text style={[{color: textColor, }, fontStyle, textStyle, ]}>
           {name}
         </Text>
       </View>
@@ -148,7 +148,7 @@ const ScrollableTabBar = createReactClass({
   measureTab(page, event) {
     const { x, width, height, } = event.nativeEvent.layout;
     this._tabsMeasurements[page] = {left: x, right: x + width, width, height, };
-    this.updateView({value: this.props.scrollValue._value, });
+    this.updateView({value: this.props.scrollValue.__getValue(), });
   },
 
   render() {
@@ -207,12 +207,12 @@ const ScrollableTabBar = createReactClass({
       width = WINDOW_WIDTH;
     }
     this.setState({ _containerWidth: width, });
-    this.updateView({value: this.props.scrollValue._value, });
+    this.updateView({value: this.props.scrollValue.__getValue(), });
   },
 
   onContainerLayout(e) {
     this._containerMeasurements = e.nativeEvent.layout;
-    this.updateView({value: this.props.scrollValue._value, });
+    this.updateView({value: this.props.scrollValue.__getValue(), });
   },
 });
 
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: 50,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
